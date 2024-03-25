@@ -15,7 +15,7 @@ const port = 1005;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://6601c89fc1dfcf30214879cb--golden-hotteok-426593.netlify.app',
     credentials: true
 }));
 
