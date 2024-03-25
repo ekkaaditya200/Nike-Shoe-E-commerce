@@ -9,7 +9,7 @@ const Item = ({ fetchItems, ifExists, id, title, color, shadow, text, img, btn, 
 
     const addItem = async () => {
         try {
-            const result = await fetch("http://localhost:1005/api/items/add", {
+            const result = await fetch("https://nike-shoe-e-commerce.onrender.com/api/items/add", {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const Item = ({ fetchItems, ifExists, id, title, color, shadow, text, img, btn, 
 
     const updateItem = async (_id, cartQuantity) => {
         try {
-            const response = await fetch(`http://localhost:1005/api/items/update/${_id}`, {
+            const response = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/update/${_id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const Item = ({ fetchItems, ifExists, id, title, color, shadow, text, img, btn, 
 
     const findItem = async () => {
         try {
-            const result = await fetch(`http://localhost:1005/api/items/find/${userRef}`, {
+            const result = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/find/${userRef}`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
