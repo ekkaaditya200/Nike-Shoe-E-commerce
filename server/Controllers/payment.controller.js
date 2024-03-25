@@ -10,5 +10,5 @@ export const checkout = async (req,res) => {
 }
 
 export const paymentVerification = async (req, res) => {
-    res.redirect('http://localhost:5173/orders');
+    res.redirect('https://6601c89fc1dfcf30214879cb--golden-hotteok-426593.netlify.app/orders');
 };
