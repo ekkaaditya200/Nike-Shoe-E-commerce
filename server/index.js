@@ -6,7 +6,6 @@ import authRouter from './Routes/auth.route.js';
 import itemsRouter from './Routes/items.route.js';
 import paymentRouter from './Routes/payment.route.js'
 import cookieParser from "cookie-parser";
-import Razorpay from 'razorpay';
 
 dotenv.config();
 const app = express();
@@ -15,7 +14,7 @@ const port = 1005;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://6601c89fc1dfcf30214879cb--golden-hotteok-426593.netlify.app/',
     credentials: true
 }));
 
