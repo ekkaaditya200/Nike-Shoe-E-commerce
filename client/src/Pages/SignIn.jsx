@@ -18,7 +18,7 @@ const SignIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://nike-shoe-e-commerce-server.vercel.app/api/auth/signin", {
+      const res = await fetch("https://nike-shoe-e-commerce.onrender.com/api/auth/signin", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
