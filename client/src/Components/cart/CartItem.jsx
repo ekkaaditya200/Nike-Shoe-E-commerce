@@ -6,7 +6,7 @@ const CartItem = ({item,fetchItems}) => {
   const userId = useSelector(state=>state.auth.userId);
   const onRemoveItem = async (ItemId) =>{
     try{
-      const response = await fetch(`http://localhost:1005/api/items/delete/${ItemId}`,{
+      const response = await fetch(`https://nike-shoe-e-commerce-server.vercel.app/api/items/delete/${ItemId}`,{
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const CartItem = ({item,fetchItems}) => {
 
   const updateItem = async (ItemId,cartQuantity) => {
     try{
-      const response = await fetch(`http://localhost:1005/api/items/update/${ItemId}`,{
+      const response = await fetch(`https://nike-shoe-e-commerce-server.vercel.app/api/items/update/${ItemId}`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

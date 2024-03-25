@@ -20,7 +20,7 @@ const Cart = ({ fetchItems }) => {
 
   const onClearCartItems = async () => {
     try {
-      const response = await fetch(`http://localhost:1005/api/items/deleteAll/${userId}`, {
+      const response = await fetch(`https://nike-shoe-e-commerce-server.vercel.app/api/items/deleteAll/${userId}`, {
         method: 'DELETE'
       })
       const result = await response.json();
@@ -39,13 +39,13 @@ const Cart = ({ fetchItems }) => {
     var data = {};
     var key = "";
     try {
-      const result = await fetch("http://localhost:1005/api/getKey");
+      const result = await fetch("https://nike-shoe-e-commerce-server.vercel.app/api/getKey");
       key = await result.json();
     } catch (error) {
       console.log(error);
     }
     try {
-      const result = await fetch('http://localhost:1005/api/payment/checkout', {
+      const result = await fetch('https://nike-shoe-e-commerce-server.vercel.app/api/payment/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const Cart = ({ fetchItems }) => {
       "description": "Test Transaction",
       "image": {hero},
       "order_id": data.order.id,
-      "callback_url": "http://localhost:1005/api/payment/paymentVerification",
+      "callback_url": "https://nike-shoe-e-commerce-server.vercel.app/api/payment/paymentVerification",
       "prefill": {
         "name": "Aditya Ekka",
         "email": "adityaekka2003@gmail.com",

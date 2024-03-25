@@ -28,7 +28,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const result = await fetch(`http://localhost:1005/api/items/show/${userId}`, {
+      const result = await fetch(`https://nike-shoe-e-commerce-server.vercel.app/api/items/show/${userId}`, {
         method: "GET",
       });
       const data = await result.json();

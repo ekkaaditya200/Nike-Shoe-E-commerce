@@ -32,7 +32,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await fetch("http://localhost:1005/api/auth/logout", {
+            const res = await fetch("https://nike-shoe-e-commerce-server.vercel.app/api/auth/logout", {
                 method: 'POST',
                 credentials: 'include'
             })
