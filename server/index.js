@@ -19,6 +19,9 @@ app.use(cors({
     credentials: true
 }));
 
+app.get("/",(req,res)=>{
+    res.json({Message:"Backend Hosted !"});
+})
 app.use("/api/auth", authRouter);
 app.use("/api/items", itemsRouter);
 app.use("/api/payment", paymentRouter);
