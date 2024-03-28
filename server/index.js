@@ -9,12 +9,12 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
-const port = 1005;
+const port = process.env.PORT || 1005;
 
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'https://6601c89fc1dfcf30214879cb--golden-hotteok-426593.netlify.app/',
+    origin: 'https://golden-hotteok-426593.netlify.app',
     credentials: true
 }));
 
