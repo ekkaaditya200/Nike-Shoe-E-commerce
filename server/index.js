@@ -9,7 +9,7 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 1005;
+const port = 1005;
 
 app.use(cookieParser());
 app.use(express.json());
