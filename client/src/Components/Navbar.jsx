@@ -8,6 +8,7 @@ import { logout } from '../app/authSlice';
 import { setCartOpen, setClearCart } from "../app/cartSlice";
 const Navbar = () => {
     const isLoggedIn = useSelector(state => state.auth.isLoggedIn);
+    const userId = useSelector(state => state.auth.userId);
     const [navState, setNavState] = useState(false);
     const dispatch = useDispatch();
     const totalQTY = useSelector(state=>state.cart.totalQTY) || 0;
@@ -32,7 +33,7 @@ const Navbar = () => {
 
     const handleLogout = async () => {
         try {
-            const res = await fetch("https://nike-shoe-e-commerce.onrender.com/api/auth/logout", {
+            const res = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/auth/logout/${userId}`, {
                 method: 'POST',
                 credentials: 'include'
             })

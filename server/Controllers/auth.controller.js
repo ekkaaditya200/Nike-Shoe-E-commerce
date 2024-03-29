@@ -82,30 +82,11 @@ export const getUser = async (req, res) => {
     }
 };
 
-
-
 export const logout = (req, res) => {
+    const userId = req.params.id;
     try {
-        const cookies = req.headers.cookie;
-
-        if (!cookies)
-            return res.status(400).json({ message: "No Previous Cookie Found" });
-
-        const prevToken = cookies.split("=")[1];
-
-        if (!prevToken)
-            return res.status(400).json({ message: "No Previous Token Found" });
-
-        jwt.verify(String(prevToken), process.env.JWT_SECRET, (error, user) => {
-            if (error) {
-                return res.status(400).json({ message: "Authentication Failed", error });
-            }
-
-            res.clearCookie(String(`${user.id}`));
-            req.cookies[String(`${user.id}`)] = "";
-
-            return res.status(200).json({ message: "Successfully Logged Out", status: 200 });
-        });
+        res.clearCookie(String(userId));
+        return res.status(200).json({ message: "Successfully Logged Out", status: 200 });
     } catch (error) {
         res.status(401).send("Unauthorized: No token provided");
     }
