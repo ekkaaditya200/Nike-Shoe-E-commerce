@@ -10,5 +10,5 @@ export const checkout = async (req,res) => {
 }
 
 export const paymentVerification = async (req, res) => {
-    res.redirect('https://dainty-croissant-8bb391.netlify.app/orders');
+    res.redirect('https://iridescent-babka-0851b7.netlify.app/orders');
 };

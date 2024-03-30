@@ -14,7 +14,7 @@ const port = 1005;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'https://dainty-croissant-8bb391.netlify.app',
+    origin: 'https://iridescent-babka-0851b7.netlify.app',
     credentials: true
 }));
 
