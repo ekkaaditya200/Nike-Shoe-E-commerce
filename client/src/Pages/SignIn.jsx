@@ -40,8 +40,8 @@ const SignIn = () => {
     <button className="absolute top-5 left-9" onClick={()=>navigate('/')}>
       <img src={backarrow} className="w-8 active:scale-75"></img>
     </button>
-      <div className="w-auto h-[400px] flex rounded-lg shadow-md border-2 border-blue-500">
-        <div className="flex-2 flex items-center bg-white rounded-l-2xl">
+      <div className="w-auto h-[400px] md:h-auto flex rounded-lg shadow-md border-2 border-blue-500 md:flex-col">
+        <div className="flex-2 flex items-center bg-white rounded-2xl ">
           <form className="p-7 flex flex-col gap-5 items-center" onSubmit={handleSubmit}>
             <h1 className="text-2xl font-bold mt-5">Login to yout account</h1>
             <input
@@ -67,7 +67,7 @@ const SignIn = () => {
             </button>
           </form>
         </div>
-        <div className="flex w-auto flex-col items-center justify-center gap-10 bg-blue-500 rounded-r-lg p-10">
+        <div className="flex w-auto flex-col items-center justify-center gap-10 bg-blue-500 rounded-r-md md:rounded-none p-10">
           <h1 className="text-white font-bold text-3xl self-center">New Here ?</h1>
           <Link to="/signup">
             <button type="button" className="border-none outline-none py-2 px-0 bg-white rounded-full w-48 font-bold text-lg cursor-pointer">

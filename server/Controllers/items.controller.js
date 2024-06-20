@@ -43,10 +43,8 @@ export const updateItem = async (req,res) => {
         return res.status(400).json({ status: 400, message: "You cand update your own Item only" });
     }
     try {
-      const result = await Item.findByIdAndUpdate(req.params.id,
-        req.body,
-        { new: true }
-      );
+      const result = await Item.findByIdAndUpdate(req.params.id,req.body,{ new: true });
+      
       res.status(200).json({status:200,message:"Item updated Successfully",result});
     } catch (error) {
         res.status(404).json({ status: 404, message: "Internal Server Error" });
