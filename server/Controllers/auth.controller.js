@@ -12,7 +12,8 @@ export const signup = async (req, res) => {
         return res.status(400).send({ message: "User with given email already exist ! Login Instead" });
 
     //! If User doesn't exist then create
-    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    // const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(password, salt);
 
     try {

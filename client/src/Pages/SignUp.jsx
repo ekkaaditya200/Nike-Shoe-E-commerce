@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import backarrow from '../assets/backarrow.svg';
+import toast from "react-hot-toast";
 const SignUp = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -25,9 +26,11 @@ const SignUp = () => {
       const result = await res.json();
       console.log(result);
       if (result.status == 201) {
+        toast.success("SignUp Successful !");
         navigate('/signin');
       }
     } catch (error) {
+      toast.error("SignUp Failed !");
       console.log(error);
     }
   }

@@ -4,7 +4,7 @@ import { heroapi, popularsales, toprateslaes, highlight, sneaker, story, footerA
 import SignIn from "./Pages/SignIn"
 import SignUp from './Pages/SignUp'
 import { useSelector, useDispatch } from "react-redux"
-import { setCartItem, setTotalAmount, setTotalQuantity } from "./app/cartSlice";
+import { setCartItem, setOrderItem, setTotalAmount, setTotalQuantity } from "./app/cartSlice";
 import { useEffect } from "react"
 function App() {
 
@@ -34,14 +34,32 @@ function App() {
       const data = await result.json();
       if (data.status == 200) {
         dispatch(setCartItem(data.Items));
+        fetchOrders();
       }
     } catch (error) {
       console.log(error);
     }
   }
 
+  const fetchOrders = async () => {
+    try{
+      const result = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/orders/show/${userId}`, {
+        method:"GET",
+      });
+      const data = await result.json();
+      if(data.status == 200)
+      {
+        dispatch(setOrderItem(data.Items))
+      }
+    }catch(error)
+    {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchItems();
+    fetchOrders();
   }, [isLoggedIn==true]);
 
   return (
@@ -50,7 +68,7 @@ function App() {
         <Route path="/" element={
           <>
             <Navbar/>
-            <Cart fetchItems={fetchItems} />
+            <Cart fetchItems={fetchItems} fetchOrders={fetchOrders}/>
             <main className="flex flex-col gap-16 relative">
               <Hero heroapi={heroapi}></Hero>
               <Sales endpoint={popularsales} fetchItems={fetchItems} ifExists />
@@ -64,7 +82,7 @@ function App() {
         }
         >
         </Route>
-        <Route path="/orders" element={<Orders></Orders>}></Route>
+        <Route path="/orders" element={<Orders fetchOrders={fetchOrders}></Orders>}></Route>
         <Route path='/signin' element={<SignIn/>}>
         </Route>
         <Route path='/signup' element={<SignUp />}>

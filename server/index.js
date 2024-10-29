@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors'; //Connect frontend to backend
 import authRouter from './Routes/auth.route.js';
 import itemsRouter from './Routes/items.route.js';
+import ordersRouter from './Routes/orders.route.js';
 import paymentRouter from './Routes/payment.route.js'
 import cookieParser from "cookie-parser";
 
@@ -23,6 +24,7 @@ app.get("/",(req,res)=>{
 })
 app.use("/api/auth", authRouter);
 app.use("/api/items", itemsRouter);
+app.use("/api/orders", ordersRouter);
 app.use("/api/payment", paymentRouter);
 app.get("/api/getKey",(req,res)=>{
     res.status(200).json(process.env.RAZORPAY_ID_KEY)

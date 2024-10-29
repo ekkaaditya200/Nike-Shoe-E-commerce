@@ -5,8 +5,8 @@ import CartCount from "./cart/CartCount"
 import CartEmpty from "./cart/CartEmpty"
 import CartItem from "./cart/CartItem"
 import { setCartOpen } from "../app/cartSlice";
-import hero from '../assets/hero.png';
-const Cart = ({ fetchItems }) => {
+import { useNavigate } from "react-router-dom";
+const Cart = ({ fetchItems, fetchOrders}) => {
   const dispatch = useDispatch();
   const cartOpen = useSelector(state => state.cart.cartOpen);
   const cartItems = useSelector(state => state.cart.items);
@@ -14,11 +14,14 @@ const Cart = ({ fetchItems }) => {
   const totalAmount = useSelector(state => state.cart.totalAmount) || 0;
   const userId = useSelector(state=>state.auth.userId);
 
+
+  const navigate=useNavigate();
+
   const onCartToggle = () => {
     dispatch(setCartOpen());
   }
 
-  const onClearCartItems = async () => {
+  const onClearCartItems = async (flag) => {
     try {
       const response = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/deleteAll/${userId}`, {
         method: 'DELETE'
@@ -27,60 +30,130 @@ const Cart = ({ fetchItems }) => {
       if (result.status == 200)
       {
         fetchItems();
-        toast.success(`Cart Cleared`);
-
+        if(flag)
+            toast.success(`Cart Cleared`);
       }
     } catch (error) {
       console.log(error)
     }
   }
 
-  const checkoutHandler = async (totalAmount) => {
-    var data = {};
-    var key = "";
+  const addItem = async (id, title, text, imageUrl, color, shadow, price, cartQuantity, userRef) => {
     try {
-      const result = await fetch("https://nike-shoe-e-commerce.onrender.com/api/getKey");
-      key = await result.json();
-    } catch (error) {
-      console.log(error);
+        const result = await fetch("https://nike-shoe-e-commerce.onrender.com/api/orders/add", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id, title, text, imageUrl, color, shadow, price, cartQuantity, userRef })
+        });
+        const data = await result.json();
+        if (data.status == 201) {
+            console.log("Item added to Orders");
+        }
     }
+    catch (error) {
+        console.log("Cant add order to db : ", error)
+    }
+}
+
+
+const addIntoOrder = async () => {
+  cartItems.map((item)=>{
+    const {id,title,_id,imageUrl,price,shadow,text,userRef,color,cartQuantity}=item;
+    addItem(id,title,text,imageUrl,color,shadow,price,cartQuantity,userRef)
+  })
+}
+
+  const checkoutHandler = async (totalAmount) => {
+    let data = {};
+    let key = "";
+  
+    // Fetch Razorpay key from the backend
     try {
-      const result = await fetch('https://nike-shoe-e-commerce.onrender.com/api/payment/checkout', {
+      const keyResult = await fetch("https://nike-shoe-e-commerce.onrender.com/api/getKey");
+      key = await keyResult.json();
+    } catch (error) {
+      console.log("Error fetching Razorpay key:", error);
+    }
+  
+    // Fetch order details from the backend
+    try {
+      const paymentResult = await fetch('https://nike-shoe-e-commerce.onrender.com/api/payment/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ totalAmount }),
-      })
-      data = await result.json();
+      });
+      data = await paymentResult.json();
+      console.log("Order data:", data);
     } catch (error) {
-      console.log(error);
+      console.log("Error creating order:", error);
     }
-
-    var options = {
-      "key": key,
-      "amount": data.order.amount,
-      "currency": "INR",
-      "name": "Nike Shoe Shop",
-      "description": "Test Transaction",
-      "image": {hero},
-      "order_id": data.order.id,
-      "callback_url": "https://nike-shoe-e-commerce.onrender.com/api/payment/paymentVerification",
-      "prefill": {
-        "name": "Aditya Ekka",
-        "email": "adityaekka2003@gmail.com",
-        "contact": "8709592501"
+  
+    // Razorpay payment options
+    const options = {
+      key: key,
+      amount: data.order.amount,
+      currency: "INR",
+      name: "Nike Shoe Shop",
+      description: "Test Transaction",
+      order_id: data.order.id,
+      prefill: {
+        name: "Aditya Ekka",
+        email: "adityaekka2003@gmail.com",
+        contact: "8709592501"
       },
-      "notes": {
-        "address": "Razorpay Corporate Office"
+      theme: {
+        color: "#3399cc"
       },
-      "theme": {
-        "color": "#3399cc"
+      handler: async function (response) {
+        console.log("Payment Success:", response);
+  
+        // After successful payment, verify payment on the backend
+        try {
+          const verificationResult = await fetch('https://nike-shoe-e-commerce.onrender.com/api/payment/paymentVerification', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_signature: response.razorpay_signature,
+              totalAmount
+            }),
+          });
+          
+          const verificationResponse = await verificationResult.json();
+          console.log("Payment verification response:", verificationResponse);
+  
+          if (verificationResponse.success) {
+            addIntoOrder();
+            fetchOrders();
+            onClearCartItems(false);
+            onCartToggle();
+            navigate('/orders');
+          } else {
+            console.log("Payment verification failed. Please try again.");
+          }
+        } catch (error) {
+          console.log("Error during payment verification:", error);
+        }
+      },
+      modal: {
+        ondismiss: function () {
+          console.log("Payment was cancelled by the user");
+        }
       }
     };
+  
     const razor = new window.Razorpay(options);
     razor.open();
   };
+  
+  
 
   return (
     <>

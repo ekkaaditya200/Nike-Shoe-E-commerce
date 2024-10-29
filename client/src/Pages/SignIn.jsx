@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {login} from '../app/authSlice';
 import backarrow from '../assets/backarrow.svg'
+import toast from "react-hot-toast";
 const SignIn = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const SignIn = () => {
         navigate('/');
       }
     } catch (error) {
+      toast.error("SignIn Failed ! Wrong email or password")
       console.log(error);
     }
   }
