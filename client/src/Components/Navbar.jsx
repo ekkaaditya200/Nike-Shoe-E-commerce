@@ -38,7 +38,6 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    console.log("Came");
     try {
       const res = await fetch(
         `https://nike-shoe-e-commerce.onrender.com/api/auth/logout/${userId}`,

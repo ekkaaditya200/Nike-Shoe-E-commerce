@@ -70,6 +70,7 @@ export const verifyToken = async (req, res, next) => {
         res.status(401).send("Unauthorized: No token provided");
     }
 };
+
 export const getUser = async (req, res) => {
     const userId = req.id;
     try {
