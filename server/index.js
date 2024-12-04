@@ -15,7 +15,7 @@ const port = 1005;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'https://ecommerce-nike-shoe.netlify.app',
+    origin: 'https://nike-shoe-e-commerce.vercel.app',
     credentials: true
 }));
 
