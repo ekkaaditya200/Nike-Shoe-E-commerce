@@ -40,7 +40,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const res = await fetch(
-        `https://nike-shoe-e-commerce.onrender.com/api/auth/logout/${userId}`,
+        `https://nike-shoe-ecommerce-store.onrender.com/api/auth/logout/${userId}`,
         {
           method: "POST",
           credentials: "include",

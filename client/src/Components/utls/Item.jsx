@@ -21,7 +21,7 @@ const Item = ({
 
   const addItem = async () => {
     try {
-      const result = await fetch("https://nike-shoe-e-commerce.onrender.com/api/items/add", {
+      const result = await fetch("https://nike-shoe-ecommerce-store.onrender.com/api/items/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ const Item = ({
   const updateItem = async (_id, cartQuantity) => {
     try {
       const response = await fetch(
-        `https://nike-shoe-e-commerce.onrender.com/api/items/update/${_id}`,
+        `https://nike-shoe-ecommerce-store.onrender.com/api/items/update/${_id}`,
         {
           method: "POST",
           headers: {
@@ -74,7 +74,7 @@ const Item = ({
   const findItem = async () => {
     try {
       const result = await fetch(
-        `https://nike-shoe-e-commerce.onrender.com/api/items/find/${userRef}`,
+        `https://nike-shoe-ecommerce-store.onrender.com/api/items/find/${userRef}`,
         {
           method: "POST",
           headers: {

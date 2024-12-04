@@ -6,7 +6,7 @@ const CartItem = ({item,fetchItems}) => {
   const userId = useSelector(state=>state.auth.userId);
   const onRemoveItem = async (ItemId) =>{
     try{
-      const response = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/delete/${ItemId}`,{
+      const response = await fetch(`https://nike-shoe-ecommerce-store.onrender.com/api/items/delete/${ItemId}`,{
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const CartItem = ({item,fetchItems}) => {
 
   const updateItem = async (ItemId,cartQuantity) => {
     try{
-      const response = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/update/${ItemId}`,{
+      const response = await fetch(`https://nike-shoe-ecommerce-store.onrender.com/api/items/update/${ItemId}`,{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

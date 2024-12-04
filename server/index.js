@@ -15,7 +15,7 @@ const port = 1005;
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors({
-    origin: 'https://storied-pasca-02e96e.netlify.app',
+    origin: 'https://ecommerce-nike-shoe.netlify.app',
     credentials: true
 }));
 

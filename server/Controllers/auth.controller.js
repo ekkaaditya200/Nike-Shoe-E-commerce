@@ -39,7 +39,7 @@ export const signin = async (req, res, next) => {
         // if the both email and password is correct we need to authenticate the user by adding cookie inside the browser we need to create the hash token that includes the email of the user or the id of the user, and we save the token inside the browser cookie. For this we will use jwt token
         const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
         const { password: pass, ...rest } = validUser._doc;
-        res.cookie(String(rest._id), token, { httpOnly: true });
+        res.cookie("token", token, { httpOnly: true });
 
         res.json({ message: "Login Sucessfully", status: 201, rest, token });
     }
@@ -87,7 +87,7 @@ export const getUser = async (req, res) => {
 export const logout = (req, res) => {
     const userId = req.params.id;
     try {
-        res.clearCookie(String(userId));
+        res.clearCookie("token");
         return res.status(200).json({ message: "Successfully Logged Out", status: 200 });
     } catch (error) {
         res.status(401).send("Unauthorized: No token provided");

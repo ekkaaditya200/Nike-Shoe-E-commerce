@@ -23,7 +23,7 @@ const Cart = ({ fetchItems, fetchOrders}) => {
 
   const onClearCartItems = async (flag) => {
     try {
-      const response = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/deleteAll/${userId}`, {
+      const response = await fetch(`https://nike-shoe-ecommerce-store.onrender.com/api/items/deleteAll/${userId}`, {
         method: 'DELETE'
       })
       const result = await response.json();
@@ -40,7 +40,7 @@ const Cart = ({ fetchItems, fetchOrders}) => {
 
   const addItem = async (id, title, text, imageUrl, color, shadow, price, cartQuantity, userRef) => {
     try {
-        const result = await fetch("https://nike-shoe-e-commerce.onrender.com/api/orders/add", {
+        const result = await fetch("https://nike-shoe-ecommerce-store.onrender.com/api/orders/add", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const addIntoOrder = async () => {
   
     // Fetch Razorpay key from the backend
     try {
-      const keyResult = await fetch("https://nike-shoe-e-commerce.onrender.com/api/getKey");
+      const keyResult = await fetch("https://nike-shoe-ecommerce-store.onrender.com/api/getKey");
       key = await keyResult.json();
     } catch (error) {
       console.log("Error fetching Razorpay key:", error);
@@ -79,7 +79,7 @@ const addIntoOrder = async () => {
   
     // Fetch order details from the backend
     try {
-      const paymentResult = await fetch('https://nike-shoe-e-commerce.onrender.com/api/payment/checkout', {
+      const paymentResult = await fetch('https://nike-shoe-ecommerce-store.onrender.com/api/payment/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -113,7 +113,7 @@ const addIntoOrder = async () => {
   
         // After successful payment, verify payment on the backend
         try {
-          const verificationResult = await fetch('https://nike-shoe-e-commerce.onrender.com/api/payment/paymentVerification', {
+          const verificationResult = await fetch('https://nike-shoe-ecommerce-store.onrender.com/api/payment/paymentVerification', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

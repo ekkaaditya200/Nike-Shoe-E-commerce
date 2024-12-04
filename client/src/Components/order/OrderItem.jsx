@@ -7,7 +7,7 @@ const OrderItem = ({ item, fetchOrders}) => {
   const onRemoveOrder = async (ItemId) => {
     try {
       const response = await fetch(
-        `https://nike-shoe-e-commerce.onrender.com/api/orders/delete/${ItemId}`,
+        `https://nike-shoe-ecommerce-store.onrender.com/api/orders/delete/${ItemId}`,
         {
           method: "DELETE",
           headers: {

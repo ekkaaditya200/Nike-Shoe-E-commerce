@@ -16,7 +16,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://nike-shoe-e-commerce.onrender.com/api/auth/signup", {
+      const res = await fetch("https://nike-shoe-ecommerce-store.onrender.com/api/auth/signup", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

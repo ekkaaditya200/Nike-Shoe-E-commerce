@@ -28,7 +28,7 @@ function App() {
 
   const fetchItems = async () => {
     try {
-      const result = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/items/show/${userId}`, {
+      const result = await fetch(`https://nike-shoe-ecommerce-store.onrender.com/api/items/show/${userId}`, {
         method: "GET",
       });
       const data = await result.json();
@@ -43,7 +43,7 @@ function App() {
 
   const fetchOrders = async () => {
     try{
-      const result = await fetch(`https://nike-shoe-e-commerce.onrender.com/api/orders/show/${userId}`, {
+      const result = await fetch(`https://nike-shoe-ecommerce-store.onrender.com/api/orders/show/${userId}`, {
         method:"GET",
       });
       const data = await result.json();
