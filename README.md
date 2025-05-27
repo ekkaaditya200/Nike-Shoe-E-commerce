@@ -38,9 +38,10 @@ A fully functional e-commerce web application inspired by Nike, built with the *
 * 📱 Fully responsive design compatible with all devices.
 
 ---
+![Nike-Store-05-27-2025_12_33_PM](https://github.com/user-attachments/assets/67246d7f-9919-406a-8410-2c1d29bc140b)
 
-![Nike-Store-05-27-2025_12_30_PM](https://github.com/user-attachments/assets/6630b2cf-149a-4cfb-a597-fcbbeb46fea3)
 ![Nike-Store-05-27-2025_12_34_PM](https://github.com/user-attachments/assets/81098f08-f8c5-4bce-9be6-40d149d82438)
+
 ![Nike-Store-05-27-2025_12_34_PM (1)](https://github.com/user-attachments/assets/53b06266-df28-4b29-8f9a-ae9d9d5c2f29)
 
 
